@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTBKER STORE - Store Hack Uy Tín Số 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #f3f4f6; }
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .cyber-border { position: relative; border: 1px solid rgba(168, 85, 247, 0.4); box-shadow: 0 0 15px rgba(168, 85, 247, 0.15); }
+        .cyber-border::before { content: ''; position: absolute; top: -2px; left: -2px; width: 6px; height: 6px; background: #a855f7; }
+        .cyber-border::after { content: ''; position: absolute; bottom: -2px; right: -2px; width: 6px; height: 6px; background: #a855f7; }
+        .neon-glow { text-shadow: 0 0 10px rgba(168, 85, 247, 0.7); }
+        .neon-box { box-shadow: 0 0 15px rgba(168, 85, 247, 0.25); }
+        .matrix-bg { background: radial-gradient(circle at center, #1e1b4b 0%, #030712 100%); }
+    </style>
+</head>
+<body class="matrix-bg min-h-screen flex flex-col justify-between selection:bg-purple-500 selection:text-white pb-24">
+
+    <!-- Header -->
+    <header class="border-b border-purple-900/50 bg-black/85 backdrop-blur-md sticky top-0 z-50 px-3 py-2">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center neon-box">
+                    <i class="fa-solid fa-skull text-white text-sm"></i>
+                </div>
+                <div>
+                    <h1 class="font-orbitron font-black text-sm text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">UTBKER STORE</h1>
+                    <p class="text-[9px] text-purple-300">Uy Tín Là Số Một</p>
+                </div>
+            </div>
+            <div id="auth-header-section" class="flex items-center space-x-2"></div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu Bar -->
+    <nav class="bg-gray-900/95 border-b border-purple-900/40 sticky top-[53px] z-40 px-2 py-2">
+        <div class="max-w-7xl mx-auto grid grid-cols-4 gap-1.5 text-center" id="navbar-menu"></div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-3 py-4 w-full flex-grow" id="main-content"></main>
+
+    <!-- Zalo Floating Chat Widget -->
+    <a href="https://zalo.me/0328870287" target="_blank" class="fixed bottom-5 right-5 z-50 bg-blue-600 text-white w-11 h-11 rounded-full shadow-2xl flex items-center justify-center neon-box">
+        <i class="fa-solid fa-comment-dots text-lg"></i>
+    </a>
+
+    <footer class="border-t border-purple-900/30 bg-black/80 py-3 text-center text-[10px] text-purple-400">
+        <p class="font-orbitron font-bold">UTBKER STORE • UY TÍN SỐ 1</p>
+    </footer>
+
+    <script>
+        let currentUser = JSON.parse(localStorage.getItem('utbker_current_user')) || null;
+        let currentTab = 'mua-key';
+
+        // Sản phẩm hỗ trợ nhiều gói giá (tiers: [{duration: '1 Ngày', price: 10000}, ...])
+        let products = JSON.parse(localStorage.getItem('utbker_products')) || [
+            { 
+                id: 1, 
+                name: 'VIP Hack Liên Quân Mobile', 
+                type: 'key', 
+                stock: 15, 
+                note: 'Anti-Ban 100%', 
+                image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop',
+                tiers: [
+                    { duration: '1 Ngày', price: 10000 },
+                    { duration: '1 Tuần', price: 30000 },
+                    { duration: '1 Tháng', price: 50000 }
+                ],
+                deliverData: 'KEY-LQ-VIP-2026-998877'
+            },
+            { 
+                id: 2, 
+                name: 'Mod Skin + Menu Hack Free Fire', 
+                type: 'key', 
+                stock: 20, 
+                note: 'Full chức năng', 
+                image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&auto=format&fit=crop',
+                tiers: [
+                    { duration: '1 Ngày', price: 10000 },
+                    { duration: '1 Tháng', price: 30000 }
+                ],
+                deliverData: 'KEY-FF-MOD-123456'
+            },
+            { 
+                id: 3, 
+                name: 'Acc Free Fire Full Skin VIP', 
+                type: 'acc', 
+                stock: 3, 
+                note: 'Trắng thông tin', 
+                image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop',
+                tiers: [
+                    { duration: 'Vĩnh viễn', price: 150000 }
+                ],
+                deliverData: 'Tài khoản: ff_vip_01 | Mật khẩu: pass123456'
+            }
+        ];
+
+        let transactions = JSON.parse(localStorage.getItem('utbker_transactions')) || [];
+        let userPurchases = JSON.parse(localStorage.getItem('utbker_user_purchases')) || [];
+        let registeredUsers = JSON.parse(localStorage.getItem('utbker_users_db')) || [
+            { username: 'admin', password: '123', displayName: 'Quản Trị Viên', gmail: 'admin@utbker.com', balance: 10000000, role: 'admin' }
+        ];
+
+        function saveLocalData() {
+            localStorage.setItem('utbker_products', JSON.stringify(products));
+            localStorage.setItem('utbker_transactions', JSON.stringify(transactions));
+            localStorage.setItem('utbker_current_user', JSON.stringify(currentUser));
+            localStorage.setItem('utbker_users_db', JSON.stringify(registeredUsers));
+            localStorage.setItem('utbker_user_purchases', JSON.stringify(userPurchases));
+        }
+
+        function renderNavbar() {
+            const nav = document.getElementById('navbar-menu');
+            let isAdmin = currentUser && currentUser.role === 'admin';
+
+            nav.innerHTML = `
+                <button onclick="switchTab('mua-key')" class="nav-btn px-2 py-1.5 rounded font-orbitron text-[10px] font-bold flex flex-col items-center justify-center ${currentTab === 'mua-key' ? 'bg-purple-600 text-white neon-box' : 'bg-gray-800/80 text-gray-300'}"><i class="fa-solid fa-key mb-0.5"></i><span>MUA KEY</span></button>
+                <button onclick="switchTab('mua-acc')" class="nav-btn px-2 py-1.5 rounded font-orbitron text-[10px] font-bold flex flex-col items-center justify-center ${currentTab === 'mua-acc' ? 'bg-purple-600 text-white neon-box' : 'bg-gray-800/80 text-gray-300'}"><i class="fa-solid fa-id-card mb-0.5"></i><span>MUA ACC</span></button>
+                <button onclick="switchTab('nap-tien')" class="nav-btn px-2 py-1.5 rounded font-orbitron text-[10px] font-bold flex flex-col items-center justify-center ${currentTab === 'nap-tien' ? 'bg-purple-600 text-white neon-box' : 'bg-gray-800/80 text-gray-300'}"><i class="fa-solid fa-wallet mb-0.5"></i><span>NẠP TIỀN</span></button>
+                <button onclick="switchTab('top-nap')" class="nav-btn px-2 py-1.5 rounded font-orbitron text-[10px] font-bold flex flex-col items-center justify-center ${currentTab === 'top-nap' ? 'bg-purple-600 text-white neon-box' : 'bg-gray-800/80 text-gray-300'}"><i class="fa-solid fa-ranking-star mb-0.5"></i><span>TOP NẠP</span></button>
+                <button onclick="switchTab('key-0d')" class="nav-btn px-2 py-1.5 rounded font-orbitron text-[10px] font-bold flex flex-col items-center justify-center ${currentTab === 'key-0d' ? 'bg-purple-600 text-white neon-box' : 'bg-gray-800/80 text-gray-300'}"><i class="fa-solid fa-gift mb-0.5"></i><span>KEY 0Đ</span></button>
+                <button onclick="switchTab('chat')" class="nav-btn px-2 py-1.5 rounded font-orbitron text-[10px] font-bold flex flex-col items-center justify-center ${currentTab === 'chat' ? 'bg-purple-600 text-white neon-box' : 'bg-gray-800/80 text-gray-300'}"><i class="fa-solid fa-comments mb-0.5"></i><span>CHAT</span></button>
+                <button onclick="switchTab('tai-khoan')" class="nav-btn px-2 py-1.5 rounded font-orbitron text-[10px] font-bold flex flex-col items-center justify-center ${currentTab === 'tai-khoan' ? 'bg-purple-600 text-white neon-box' : 'bg-gray-800/80 text-gray-300'}"><i class="fa-solid fa-user mb-0.5"></i><span>CÁ NHÂN</span></button>
+                ${isAdmin ? `
+                    <button onclick="switchTab('admin-panel')" class="nav-btn px-2 py-1.5 rounded font-orbitron text-[10px] font-bold flex flex-col items-center justify-center ${currentTab === 'admin-panel' ? 'bg-pink-600 text-white neon-box' : 'bg-pink-950/40 text-pink-400 border border-pink-500/40'}"><i class="fa-solid fa-shield-halved mb-0.5"></i><span>DUYỆT NẠP</span></button>
+                    <button onclick="switchTab('edit-products')" class="nav-btn px-2 py-1.5 rounded font-orbitron text-[10px] font-bold flex flex-col items-center justify-center ${currentTab === 'edit-products' ? 'bg-yellow-600 text-white neon-box' : 'bg-yellow-950/40 text-yellow-400 border border-yellow-500/40'}"><i class="fa-solid fa-pen-to-square mb-0.5"></i><span>SỬA SP</span></button>
+                    <button onclick="switchTab('admin-orders')" class="nav-btn px-2 py-1.5 rounded font-orbitron text-[10px] font-bold flex flex-col items-center justify-center ${currentTab === 'admin-orders' ? 'bg-cyan-600 text-white neon-box' : 'bg-cyan-950/40 text-cyan-400 border border-cyan-500/40'}"><i class="fa-solid fa-box-archive mb-0.5"></i><span>ĐƠN HÀNG</span></button>
+                ` : ''}
+            `;
+        }
+
+        function switchTab(tabId) {
+            currentTab = tabId;
+            renderContent();
+        }
+
+        function renderHeaderAuth() {
+            const headerAuth = document.getElementById('auth-header-section');
+            if (currentUser) {
+                headerAuth.innerHTML = `
+                    <div class="flex items-center space-x-1.5 bg-purple-950/60 border border-purple-500/40 px-2 py-1 rounded">
+                        <div class="text-right">
+                            <p class="text-[10px] font-bold text-cyan-400">${currentUser.displayName || currentUser.username}</p>
+                            <p class="text-[9px] text-green-400 font-mono">${currentUser.balance.toLocaleString()}đ</p>
+                        </div>
+                        <button onclick="logout()" class="text-red-400 text-xs p-0.5"><i class="fa-solid fa-power-off"></i></button>
+                    </div>
+                `;
+            } else {
+                headerAuth.innerHTML = `
+                    <button onclick="openAuthModal('login')" class="px-2.5 py-1 rounded font-orbitron text-[10px] font-bold bg-purple-600 text-white">ĐĂNG NHẬP</button>
+                    <button onclick="openAuthModal('register')" class="px-2.5 py-1 rounded font-orbitron text-[10px] font-bold border border-cyan-500 text-cyan-400">ĐĂNG KÝ</button>
+                `;
+            }
+        }
+
+        function renderContent() {
+            renderNavbar();
+            renderHeaderAuth();
+            const main = document.getElementById('main-content');
+            if (!main) return;
+
+            if (currentTab === 'mua-key' || currentTab === 'mua-acc') {
+                const typeFilter = currentTab === 'mua-key' ? 'key' : 'acc';
+                const filtered = products.filter(p => p.type === typeFilter);
+
+                main.innerHTML = `
+                    <div class="mb-3 text-center">
+                        <h2 class="text-base font-orbitron font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">${currentTab === 'mua-key' ? 'DANH MỤC KEY HACK VIP' : 'DANH MỤC TÀI KHOẢN GAME'}</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                        ${filtered.map(p => `
+                            <div class="cyber-border bg-gray-900/85 rounded-lg overflow-hidden flex flex-col justify-between">
+                                <div>
+                                    <div class="h-28 w-full overflow-hidden bg-black/50 relative">
+                                        <img src="${p.image || ''}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop'">
+                                    </div>
+                                    <div class="p-3 space-y-2">
+                                        <h3 class="font-orbitron font-bold text-xs text-white">${p.name}</h3>
+                                        <p class="text-[10px] text-gray-400 bg-black/40 p-1.5 rounded">Kho: <strong class="text-cyan-400">${p.stock}</strong> | Ghi chú: ${p.note || 'Không'}</p>
+                                        
+                                        <!-- Chọn gói thời hạn -->
+                                        <div>
+                                            <label class="block text-[10px] font-orbitron text-purple-300 mb-1">Chọn gói thời hạn:</label>
+                                            <select id="tier-select-${p.id}" class="w-full bg-black/60 border border-purple-900 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-cyan-400">
+                                                ${(p.tiers || [{duration: 'Mặc định', price: 50000}]).map((t, idx) => `
+                                                    <option value="${idx}">${t.duration} - ${t.price.toLocaleString()}đ</option>
+                                                `).join('')}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-3 pt-0 flex items-center justify-between border-t border-purple-900/30 mt-2">
+                                    <button onclick="buyProductWithTier(${p.id})" class="w-full py-1.5 rounded bg-gradient-to-r from-purple-600 to-cyan-600 font-orbitron text-[11px] font-bold text-white shadow">MUA NGAY</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (currentTab === 'nap-tien') {
+                main.innerHTML = `
+                    <div class="max-w-md mx-auto cyber-border bg-gray-900/90 p-4 rounded-xl text-xs">
+                        <h2 class="text-sm font-orbitron font-bold text-center text-cyan-400 mb-3">NẠP TIỀN TECHCOMBANK</h2>
+                        <div class="bg-black/70 p-3 rounded-lg text-center mb-3">
+                            <div class="inline-block p-1.5 bg-white rounded shadow mb-2">
+                                <img src="image.png" onerror="this.src='https://api.vietqr.io/image/970407-2126042009-Xq15V6T.jpg?accountName=Y%20UT%20BKRONG&amount=0&addInfo=UTBKER'" class="w-36 h-36 object-contain mx-auto">
+                            </div>
+                            <div class="text-left space-y-1 bg-gray-900 p-2 rounded border border-purple-900">
+                                <p><span class="text-gray-400">Chủ TK:</span> <strong class="text-cyan-400">Y UT BKRONG</strong></p>
+                                <p><span class="text-gray-400">Số TK:</span> <strong class="text-pink-400 font-mono">2126042009</strong></p>
+                                <p><span class="text-gray-400">Nội dung:</span> <strong class="text-yellow-400 font-mono">UTBKER ${currentUser ? currentUser.username : 'USER'}</strong></p>
+                            </div>
+                        </div>
+                        <form onsubmit="submitDeposit(event)" class="space-y-2">
+                            <input type="number" id="deposit-amount" required placeholder="Nhập số tiền đã CK (VNĐ)" class="w-full bg-black/50 border border-purple-900 rounded px-3 py-2 text-white text-xs">
+                            <button type="submit" class="w-full py-2 rounded bg-gradient-to-r from-purple-600 to-cyan-600 font-orbitron font-bold text-xs text-white">XÁC NHẬN ĐÃ CHUYỂN KHOẢN</button>
+                        </form>
+                    </div>
+                `;
+            } else if (currentTab === 'top-nap') {
+                main.innerHTML = `<div class="max-w-md mx-auto cyber-border bg-gray-900/90 p-4 rounded-xl text-xs"><h2 class="text-sm font-orbitron font-bold text-center text-yellow-400 mb-3">BẢNG XẾP HẠNG TOP NẠP</h2><div class="p-2.5 bg-purple-950/40 rounded flex justify-between"><span class="text-white font-bold">1. ProPlayer99</span><span class="text-green-400 font-mono">5,200,000đ</span></div></div>`;
+            } else if (currentTab === 'key-0d') {
+                main.innerHTML = `<div class="max-w-md mx-auto cyber-border bg-gray-900/90 p-4 rounded-xl text-center text-xs"><h2 class="text-sm font-orbitron font-bold text-cyan-400 mb-2">KEY TRẢI NGHIỆM 0Đ</h2><p class="text-gray-400 mb-3">Mã hôm nay:</p><p class="font-mono font-bold text-yellow-400 bg-black/60 py-2 rounded mb-3">UTBKER-FREE-2026</p><button onclick="alert('Nhận thành công!')" class="px-3 py-1.5 bg-purple-600 text-white rounded font-orbitron font-bold">LẤY KEY</button></div>`;
+            } else if (currentTab === 'chat') {
+                main.innerHTML = `<div class="max-w-md mx-auto cyber-border bg-gray-900/90 p-3 rounded-xl flex flex-col h-[350px] text-xs"><h2 class="font-orbitron font-bold text-purple-400 mb-2">HỖ TRỢ TRỰC TUYẾN</h2><div class="flex-grow overflow-y-auto space-y-2 mb-2"><div class="bg-purple-950/40 p-2 rounded"><p class="font-bold text-cyan-400">Admin</p><p class="text-gray-300">Zalo: 0328870287</p></div></div><div class="flex space-x-1"><input type="text" placeholder="Nhập tin nhắn..." class="flex-grow bg-black/50 border border-purple-900 rounded px-2 py-1.5 text-white"><button onclick="alert('Đã gửi!')" class="px-3 bg-purple-600 text-white rounded"><i class="fa-solid fa-paper-plane"></i></button></div></div>`;
+            } else if (currentTab === 'tai-khoan') {
+                if (!currentUser) { main.innerHTML = `<div class="text-center py-10 text-xs text-gray-400">Vui lòng đăng nhập.<br><button onclick="openAuthModal('login')" class="mt-2 px-3 py-1 bg-purple-600 text-white rounded font-orbitron">ĐĂNG NHẬP</button></div>`; return; }
+                let myPurchases = userPurchases.filter(x => x.username === currentUser.username);
+                main.innerHTML = `
+                    <div class="max-w-xl mx-auto cyber-border bg-gray-900/90 p-4 rounded-xl text-xs space-y-4">
+                        <h2 class="font-orbitron font-bold text-purple-400 mb-1">TÀI KHOẢN CÁ NHÂN</h2>
+                        <div class="space-y-1 bg-black/40 p-3 rounded border border-purple-900/50">
+                            <p class="flex justify-between"><span class="text-gray-400">Tên hiển thị:</span> <strong class="text-white">${currentUser.displayName}</strong></p>
+                            <p class="flex justify-between"><span class="text-gray-400">Tên đăng nhập:</span> <strong class="text-cyan-400">${currentUser.username}</strong></p>
+                            <p class="flex justify-between"><span class="text-gray-400">Gmail:</span> <strong class="text-gray-300">${currentUser.gmail || 'Chưa cập nhật'}</strong></p>
+                            <p class="flex justify-between"><span class="text-gray-400">Số dư ví:</span> <strong class="text-green-400 font-mono">${currentUser.balance.toLocaleString()}đ</strong></p>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron font-bold text-yellow-400 mb-2">Lịch Sử Mua Hàng & Nhận Key / File:</h3>
+                            <div class="space-y-2 max-h-60 overflow-y-auto">
+                                ${myPurchases.length === 0 ? '<p class="text-gray-500">Chưa có đơn hàng nào.</p>' : myPurchases.map(item => `
+                                    <div class="bg-black/60 p-3 rounded border border-purple-900/50 space-y-1.5">
+                                        <div class="flex justify-between">
+                                            <span class="font-bold text-white">${item.productName} <span class="text-purple-300">(${item.selectedTier})</span></span>
+                                            <span class="text-green-400 font-mono">${item.price.toLocaleString()}đ</span>
+                                        </div>
+                                        <p class="text-[10px] text-gray-400">Thời gian: ${item.time}</p>
+                                        <div class="bg-purple-950/60 p-2 rounded border border-purple-500/40 mt-1">
+                                            <p class="text-[10px] font-bold text-cyan-300 mb-0.5"><i class="fa-solid fa-key mr-1"></i>Nội dung bàn giao / Key / File ghi chú:</p>
+                                            <p class="font-mono text-yellow-300 select-all bg-black/50 p-1.5 rounded">${item.deliverData}</p>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (currentTab === 'admin-panel') {
+                if (!currentUser || currentUser.role !== 'admin') { main.innerHTML = `<div class="text-center py-10 text-red-400 text-xs">KHÔNG CÓ QUYỀN TRUY CẬP!</div>`; return; }
+                main.innerHTML = `
+                    <div class="max-w-xl mx-auto cyber-border bg-gray-900/90 p-4 rounded-xl text-xs space-y-3">
+                        <h2 class="font-orbitron font-bold text-pink-400"><i class="fa-solid fa-shield-halved mr-1"></i>DUYỆT NẠP TIỀN KHÁCH HÀNG</h2>
+                        <div class="bg-black/50 p-2.5 rounded border border-purple-900">
+                            ${transactions.filter(t => t.type === 'deposit' && t.status === 'pending').length === 0 ? '<p class="text-gray-500">Không có lệnh nạp nào đang chờ.</p>' : transactions.filter(t => t.type === 'deposit' && t.status === 'pending').map(t => `<div class="flex justify-between items-center bg-gray-900 p-2 rounded mb-1"><span>${t.username} -${t.amount.toLocaleString()}đ</span><button onclick="approveDeposit('${t.id}')" class="px-2.5 py-1 bg-green-600 text-white rounded font-bold">DUYỆT</button></div>`).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (currentTab === 'edit-products') {
+                if (!currentUser || currentUser.role !== 'admin') { main.innerHTML = `<div class="text-center py-10 text-red-400 text-xs">KHÔNG CÓ QUYỀN TRUY CẬP!</div>`; return; }
+                main.innerHTML = `
+                    <div class="max-w-3xl mx-auto cyber-border bg-gray-900/90 p-4 rounded-xl text-xs space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h2 class="font-orbitron font-bold text-yellow-400"><i class="fa-solid fa-pen-to-square mr-1"></i>QUẢN LÝ SẢN PHẨM & GÓI THỜI GIAN</h2>
+                            <button onclick="addNewProduct()" class="px-3 py-1.5 bg-purple-600 text-white rounded font-bold font-orbitron">+ THÊM SẢN PHẨM</button>
+                        </div>
+                        <div class="space-y-2 max-h-[450px] overflow-y-auto">
+                            ${products.map(p => `
+                                <div class="bg-gray-900 p-3 rounded border border-purple-900/50 space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center space-x-2">
+                                            <img src="${p.image || ''}" class="w-9 h-9 object-cover rounded bg-black" onerror="this.src='https://via.placeholder.com/40'">
+                                            <div>
+                                                <p class="text-white font-bold">${p.name}</p>
+                                                <p class="text-[10px] text-gray-400">Kho: ${p.stock} \vert{} Gói: ${(p.tiers || []).map(t => `${t.duration}: ${t.price.toLocaleString()}đ`).join(', ')}</p>
+                                            </div>
+                                        </div>
+                                        <div class="space-x-1">
+                                            <button onclick="editProduct(${p.id})" class="px-2.5 py-1 bg-blue-600 text-white rounded font-bold">SỬA</button>
+                                            <button onclick="deleteProduct(${p.id})" class="px-2.5 py-1 bg-red-600 text-white rounded font-bold">XÓA</button>
+                                        </div>
+                                    </div>
+                                    <div class="bg-black/50 p-2 rounded border border-purple-900/30">
+                                        <p class="text-[10px] text-cyan-300 font-bold mb-0.5">Nội dung bàn giao (Key / File):</p>
+                                        <p class="font-mono text-yellow-300">${p.deliverData || 'Chưa có'}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (currentTab === 'admin-orders') {
+                if (!currentUser || currentUser.role !== 'admin') { main.innerHTML = `<div class="text-center py-10 text-red-400 text-xs">KHÔNG CÓ QUYỀN TRUY CẬP!</div>`; return; }
+                main.innerHTML = `
+                    <div class="max-w-3xl mx-auto cyber-border bg-gray-900/90 p-4 rounded-xl text-xs space-y-3">
+                        <h2 class="font-orbitron font-bold text-cyan-400"><i class="fa-solid fa-box-archive mr-1"></i>QUẢN LÝ LỊCH SỬ MUA HÀNG TOÀN HỆ THỐNG</h2>
+                        <div class="space-y-2 max-h-[450px] overflow-y-auto">
+                            ${userPurchases.length === 0 ? '<p class="text-gray-500">Chưa có đơn hàng nào.</p>' : userPurchases.map(item => `
+                                <div class="bg-black/60 p-3 rounded border border-purple-900/50 space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <p class="text-white font-bold">Khách: <span class="text-cyan-400">${item.username}</span> - ${item.productName} (${item.selectedTier})</p>
+                                            <p class="text-[10px] text-gray-400">Thời gian: ${item.time} \vert{} Giá: ${item.price.toLocaleString()}đ</p>
+                                        </div>
+                                        <button onclick="editOrderData('${item.purchaseId}')" class="px-2.5 py-1 bg-yellow-600 text-white rounded font-bold">SỬA KEY</button>
+                                    </div>
+                                    <div class="bg-purple-950/60 p-2 rounded border border-purple-500/40">
+                                        <p class="text-[10px] font-bold text-cyan-300 mb-0.5">Bàn giao:</p>
+                                        <p class="font-mono text-yellow-300">${item.deliverData}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function buyProductWithTier(productId) {
+            if (!currentUser) { alert('Vui lòng đăng nhập!'); openAuthModal('login'); return; }
+            let p = products.find(x => x.id === productId);
+            if (!p) return;
+
+            let selectEl = document.getElementById(`tier-select-${productId}`);
+            let tierIdx = selectEl ? parseInt(selectEl.value) : 0;
+            let selectedTierObj = p.tiers[tierIdx] || { duration: 'Mặc định', price: 50000 };
+
+            if (currentUser.balance < selectedTierObj.price) { 
+                alert('Số dư ví không đủ, vui lòng nạp thêm tiền!'); 
+                switchTab('nap-tien'); 
+                return; 
+            }
+            if (p.stock <= 0) { alert('Sản phẩm đã hết hàng!'); return; }
+            
+            currentUser.balance -= selectedTierObj.price;
+            p.stock -= 1;
+            
+            let purchaseItem = {
+                purchaseId: 'PUR-' + Date.now(),
+                username: currentUser.username,
+                productName: p.name,
+                selectedTier: selectedTierObj.duration,
+                price: selectedTierObj.price,
+                deliverData: p.deliverData || 'Đang cập nhật',
+                time: new Date().toLocaleString()
+            };
+            userPurchases.unshift(purchaseItem);
+
+            transactions.push({ id: 'TX-'+Date.now(), username: currentUser.username, type: 'buy', amount: selectedTierObj.price, details: `Mua ${p.name} (${selectedTierObj.duration})`, status: 'success' });
+            saveLocalData();
+            renderContent();
+            alert(`Thanh toán thành công gói ${selectedTierObj.duration}! Xem Key/File bàn giao tại mục CÁ NHÂN.`);
+        }
+
+        function submitDeposit(e) {
+            e.preventDefault();
+            if (!currentUser) { alert('Vui lòng đăng nhập!'); openAuthModal('login'); return; }
+            let amt = parseInt(document.getElementById('deposit-amount').value);
+            transactions.push({ id: 'TX-'+Date.now(), username: currentUser.username, type: 'deposit', amount: amt, details: 'Nạp Techcombank', status: 'pending' });
+            saveLocalData();
+            alert('Đã gửi yêu cầu nạp tiền!');
+            switchTab('tai-khoan');
+        }
+
+        function approveDeposit(txId) {
+            let tx = transactions.find(x => x.id === txId);
+            if (tx) { 
+                tx.status = 'approved'; 
+                let targetUser = registeredUsers.find(u => u.username === tx.username);
+                if(targetUser) {
+                    targetUser.balance += tx.amount;
+                    if(currentUser && currentUser.username === targetUser.username) {
+                        currentUser.balance = targetUser.balance;
+                    }
+                }
+                saveLocalData(); 
+                renderContent(); 
+                alert('Đã duyệt cộng tiền thành công!'); 
+            }
+        }
+
+        function editProduct(id) {
+            let p = products.find(x => x.id === id);
+            if (!p) return;
+            p.name = prompt('Sửa Tên sản phẩm:', p.name) || p.name;
+            p.stock = parseInt(prompt('Sửa Số lượng kho:', p.stock)) || p.stock;
+            p.note = prompt('Sửa Ghi chú:', p.note || '') || '';
+            p.image = prompt('Sửa Link Hình ảnh (URL):', p.image || '') || '';
+            p.deliverData = prompt('Sửa nội dung bàn giao (Key / Link file):', p.deliverData || '') || '';
+            
+            let price1Day = prompt('Nhập giá Gói 1 Ngày (bỏ trống nếu không có):', '');
+            let price1Week = prompt('Nhập giá Gói 1 Tuần (bỏ trống nếu không có):', '');
+            let price1Month = prompt('Nhập giá Gói 1 Tháng (bỏ trống nếu không có):', '');
+
+            let newTiers = [];
+            if(price1Day) newTiers.push({ duration: '1 Ngày', price: parseInt(price1Day) });
+            if(price1Week) newTiers.push({ duration: '1 Tuần', price: parseInt(price1Week) });
+            if(price1Month) newTiers.push({ duration: '1 Tháng', price: parseInt(price1Month) });
+            if(newTiers.length > 0) p.tiers = newTiers;
+
+            saveLocalData();
+            renderContent();
+            alert('Đã cập nhật sản phẩm thành công!');
+        }
+
+        function deleteProduct(id) {
+            products = products.filter(x => x.id !== id);
+            saveLocalData();
+            renderContent();
+            alert('Đã xóa sản phẩm!');
+        }
+
+        function addNewProduct() {
+            let name = prompt('Nhập tên sản phẩm mới:');
+            if (!name) return;
+            let stock = parseInt(prompt('Số lượng tồn kho:', '10')) || 10;
+            let note = prompt('Ghi chú sản phẩm:', 'Bản VIP') || '';
+            let image = prompt('Link hình ảnh (URL):', 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop') || '';
+            let deliverData = prompt('Nhập nội dung bàn giao (Key / Link tải):', 'KEY-VIP-EXAMPLE') || '';
+            
+            let price1Day = prompt('Giá Gói 1 Ngày (đ):', '10000');
+            let price1Week = prompt('Giá Gói 1 Tuần (đ):', '30000');
+            let price1Month = prompt('Giá Gói 1 Tháng (đ):', '50000');
+
+            let tiers = [];
+            if(price1Day) tiers.push({ duration: '1 Ngày', price: parseInt(price1Day) });
+            if(price1Week) tiers.push({ duration: '1 Tuần', price: parseInt(price1Week) });
+            if(price1Month) tiers.push({ duration: '1 Tháng', price: parseInt(price1Month) });
+            if(tiers.length === 0) tiers.push({ duration: 'Vĩnh viễn', price: 50000 });
+
+            products.push({ id: Date.now(), name, type: 'key', stock, note, image, tiers, deliverData });
+            saveLocalData();
+            renderContent();
+            alert('Đã thêm sản phẩm thành công!');
+        }
+
+        function editOrderData(purchaseId) {
+            let item = userPurchases.find(x => x.purchaseId === purchaseId);
+            if (!item) return;
+            let newData = prompt('Chỉnh sửa nội dung bàn giao cho khách:', item.deliverData);
+            if (newData !== null) {
+                item.deliverData = newData;
+                saveLocalData();
+                renderContent();
+                alert('Đã cập nhật thành công!');
+            }
+        }
+
+        function openAuthModal(mode) {
+            let title = mode === 'login' ? 'ĐĂNG NHẬP HỆ THỐNG' : 'ĐĂNG KÝ TÀI KHOẢN MỚI';
+            let formContent = mode === 'login' ? `
+                <input type="text" id="login-username" required placeholder="Tên đăng nhập" class="w-full bg-black/50 border border-purple-900 rounded px-2.5 py-1.5 text-white text-xs">
+                <input type="password" id="login-password" required placeholder="Mật khẩu" class="w-full bg-black/50 border border-purple-900 rounded px-2.5 py-1.5 text-white text-xs">
+            ` : `
+                <input type="text" id="reg-displayname" required placeholder="Tên hiển thị" class="w-full bg-black/50 border border-purple-900 rounded px-2.5 py-1.5 text-white text-xs">
+                <input type="text" id="reg-username" required placeholder="Tên đăng nhập" class="w-full bg-black/50 border border-purple-900 rounded px-2.5 py-1.5 text-white text-xs">
+                <input type="password" id="reg-password" required placeholder="Mật khẩu" class="w-full bg-black/50 border border-purple-900 rounded px-2.5 py-1.5 text-white text-xs">
+                <input type="email" id="reg-gmail" required placeholder="Địa chỉ Gmail" class="w-full bg-black/50 border border-purple-900 rounded px-2.5 py-1.5 text-white text-xs">
+            `;
+
+            let html = `
+                <div id="auth-modal" class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+                    <div class="cyber-border bg-gray-900 w-full max-w-xs p-4 rounded-xl relative">
+                        <button onclick="document.getElementById('auth-modal').remove()" class="absolute top-2 right-2 text-gray-400"><i class="fa-solid fa-xmark"></i></button>
+                        <h3 class="text-xs font-orbitron font-bold text-purple-400 mb-3 text-center">${title}</h3>
+                        <form onsubmit="handleAuth(event, '${mode}')" class="space-y-2">
+                            ${formContent}
+                            <button type="submit" class="w-full py-2 bg-purple-600 text-white rounded font-orbitron text-xs font-bold mt-1">${mode === 'login' ? 'ĐĂNG NHẬP' : 'HOÀN TẤT ĐĂNG KÝ'}</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', html);
+        }
+
+        function handleAuth(e, mode) {
+            e.preventDefault();
+            if (mode === 'login') {
+                let u = document.getElementById('login-username').value.trim();
+                let p = document.getElementById('login-password').value.trim();
+                let found = registeredUsers.find(x => x.username === u && x.password === p);
+                if (found) {
+                    currentUser = found;
+                    saveLocalData();
+                    renderContent();
+                    document.getElementById('auth-modal').remove();
+                    alert('Đăng nhập thành công!');
+                } else {
+                    alert('Sai tên đăng nhập hoặc mật khẩu!');
+                }
+            } else {
+                let displayName = document.getElementById('reg-displayname').value.trim();
+                let username = document.getElementById('reg-username').value.trim();
+                let password = document.getElementById('reg-password').value.trim();
+                let gmail = document.getElementById('reg-gmail').value.trim();
+
+                if (registeredUsers.some(x => x.username === username)) {
+                    alert('Tên đăng nhập này đã tồn tại!');
+                    return;
+                }
+
+                let newUser = { username, password, displayName, gmail, balance: 0, role: 'user' };
+                registeredUsers.push(newUser);
+                currentUser = newUser;
+                saveLocalData();
+                document.getElementById('auth-modal').remove();
+                renderContent();
+                alert('Đăng ký tài khoản thành công!');
+            }
+        }
+
+        function logout() { currentUser = null; saveLocalData(); switchTab('mua-key'); alert('Đã đăng xuất!'); }
+
+        renderContent();
+    </script>
+</body>
+</html>
